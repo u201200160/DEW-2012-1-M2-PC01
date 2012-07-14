@@ -1,0 +1,38 @@
+<h1>Listing clients</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Lastname</th>
+    <th>Creditcard</th>
+	<th>monto</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @clients.each do |client| %>
+  <tr>
+    <td><%= client.name %></td>
+    <td><%= client.lastname %></td>
+    <td><%= client.creditcard %></td>
+	<td>
+	<%  monto=0 %>
+			<% @products.each do |product| %>
+			  <% if product.client.id==client.id %>
+				<% monto=monto+product.cost %>	
+			  <% end %>	
+			<% end %>	
+	<%= monto%>
+	</td>
+	
+    <td><%= link_to 'Show', client %></td>
+    <td><%= link_to 'Edit', edit_client_path(client) %></td>
+    <td><%= link_to 'Destroy', client, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Client', new_client_path %>
